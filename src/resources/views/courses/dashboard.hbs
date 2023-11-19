@@ -1,0 +1,112 @@
+<div class="mt-4">
+  <div>
+    <a href="/courses/trash">Thùng rác</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Image</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each courses}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+          {{#each image}}
+            {{#if @first}}
+              <td>
+                <img src="{{this}}" alt="" style="width: 200px;" />
+              </td>
+            {{/if}}
+
+          {{/each}}
+          <td>
+            <a href="/courses/{{this._id}}/edit">
+              <button type="button" class="btn btn-success">edit</button></a>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-modal"
+              data-id="{{this._id}}"
+            >Delete</button>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="5" class="text-center">
+            Danh sách trống
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="delete-modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Bạn chắc chắn
+              muôn xóa chứ:</label>
+            <input type="text" class="form-control" id="recipient-name" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <a
+          type="button"
+          class="btn btn-danger"
+          id="btn-delete-course"
+        >DELETE</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="delete-form" method="POST"></form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){ var courseId; var
+  deleteForm = document.forms['delete-form']; 
+  var deleteModal = document.getElementById('delete-modal');  
+  var btnDeleteCourse = document.getElementById('btn-delete-course');
+  deleteModal.addEventListener('show.bs.modal', function (event) { 
+    var button = event.relatedTarget; 
+    console.log(button); 
+    courseId = button.getAttribute('data-id') 
+    console.log(courseId) 
+    })
+  btnDeleteCourse.onclick = function(){ 
+    console.log("HI") 
+    deleteForm.action ='/courses/'+courseId+'?_method=DELETE'; deleteForm.submit() } })
+
+</script>

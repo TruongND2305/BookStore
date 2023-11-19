@@ -1,0 +1,9 @@
+<h1>{{course.name}}</h1>
+<h1>{{course.description}}</h1>
+{{!-- <img src="{{course.image}}" alt="" /> --}}
+{{#each image}}
+  {{#if @first}}
+      <img src="{{this}}" alt="" style="width: 200px;" />
+  {{/if}}
+
+{{/each}}

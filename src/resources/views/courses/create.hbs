@@ -1,0 +1,35 @@
+<div class="mt-4">
+  <form action="/courses/store" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Enter name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        name="description"
+        placeholder="Decription"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Image</label>
+      <input
+        type="file"
+        class="form-control"
+        id="image"
+        name="image"
+        multiple="multiple"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
